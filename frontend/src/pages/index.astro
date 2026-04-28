@@ -5,6 +5,7 @@ import ImagePreview from '../components/ImagePreview.svelte';
 import InvoiceForm from '../components/InvoiceForm.svelte';
 import Auth from '../components/Auth.svelte';
 import SaveButton from '../components/SaveButton.svelte';
+import { appState } from '../stores/app.js';
 
 let imageData = null;
 let invoiceData = {};
@@ -13,71 +14,107 @@ let isVerifying = false;
 let error = null;
 let success = null;
 
+// Subscribe to app state updates
+appState.subscribe(($appState) => {
+    imageData = $appState.currentImage;
+    invoiceData = $appState.invoiceData;
+    isProcessing = $appState.isProcessing;
+    isVerifying = $appState.isVerifying;
+    error = $appState.error;
+    success = $appState.success;
+});
+
 // Handle image selection from ImageInput component
 function handleImageSelected(event) {
-  imageData = event.detail;
-  // In a real app, we would send this to the backend for OCR processing
-  // For now, we'll simulate the OCR result
-  simulateOCRProcessing();
+    // Update app state with selected image
+    appState.update(state => ({
+        ...state,
+        currentImage: event.detail,
+        isProcessing: true,
+        error: null
+    }));
+
+    // Simulate OCR processing
+    simulateOCRProcessing();
 }
 
 // Simulate OCR processing (in real app, this would be an API call)
 async function simulateOCRProcessing() {
-  isProcessing = true;
-  error = null;
+    try {
+        // Simulate API delay
+        await new Promise(resolve => setTimeout(resolve, 2000));
 
-  try {
-    // Simulate API delay
-    await new Promise(resolve => setTimeout(resolve, 2000));
+        // Mock OCR response - in real app, this would come from backend OCR endpoint
+        const mockInvoiceData = {
+            vendor: "ABC Store",
+            date: "2026-04-20",
+            amount: 45.67,
+            tax: 3.65,
+            line_items: [
+                { description: "Product A", quantity: 2, unit_price: 10.00, amount: 20.00 },
+                { description: "Product B", quantity: 1, unit_price: 15.00, amount: 15.00 },
+                { description: "Product C", quantity: 3, unit_price: 3.56, amount: 10.67 }
+            ],
+            notes: "Purchase from ABC Store on April 20, 2026"
+        };
 
-    // Mock OCR response - in real app, this would come from backend OCR endpoint
-    invoiceData = {
-      vendor: "ABC Store",
-      date: "2026-04-20",
-      amount: 45.67,
-      tax: 3.65,
-      line_items: [
-        { description: "Product A", quantity: 2, unit_price: 10.00, amount: 20.00 },
-        { description: "Product B", quantity: 1, unit_price: 15.00, amount: 15.00 },
-        { description: "Product C", quantity: 3, unit_price: 3.56, amount: 10.67 }
-      ],
-      notes: "Purchase from ABC Store on April 20, 2026"
-    };
-
-    isProcessing = false;
-    isVerifying = true;
-  } catch (err) {
-    console.error('OCR processing error:', err);
-    error = 'Failed to process image. Please try again.';
-    isProcessing = false;
-  }
+        // Update app state with OCR results
+        appState.update(state => ({
+            ...state,
+            invoiceData: mockInvoiceData,
+            isProcessing: false,
+            isVerifying: true
+        }));
+    } catch (err) {
+        console.error('OCR processing error:', err);
+        appState.update(state => ({
+            ...state,
+            error: 'Failed to process image. Please try again.',
+            isProcessing: false
+        }));
+    }
 }
 
 // Handle updated invoice data from InvoiceForm component
 function handleInvoiceUpdated(event) {
-  invoiceData = event.detail;
+    appState.update(state => ({
+        ...state,
+        invoiceData: event.detail
+    }));
 }
 
 // Handle save invoice from SaveButton component
 async function handleSaveInvoice(event) {
-  const dataToSave = event.detail;
-  error = null;
-  success = null;
+    const dataToSave = event.detail;
 
-  try {
-    // In a real app, we would send this to the backend save endpoint
-    // For now, we'll simulate the save operation
-    await new Promise(resolve => setTimeout(resolve, 1500));
+    // Update app state to show saving
+    appState.update(state => ({
+        ...state,
+        error: null,
+        success: null
+    }));
 
-    success = 'Invoice saved successfully to Google Drive!';
-    // Reset form after successful save
-    imageData = null;
-    invoiceData = {};
-    isVerifying = false;
-  } catch (err) {
-    console.error('Save error:', err);
-    error = 'Failed to save invoice. Please try again.';
-  }
+    try {
+        // In a real app, we would send this to the backend save endpoint
+        // For now, we'll simulate the save operation
+        await new Promise(resolve => setTimeout(resolve, 1500));
+
+        // Update app state with success
+        appState.update(state => ({
+            ...state,
+            success: 'Invoice saved successfully to Google Drive!',
+            // Reset form after successful save
+            currentImage: null,
+            invoiceData: {},
+            isVerifying: false
+        }));
+    } catch (err) {
+        console.error('Save error:', err);
+        appState.update(state => ({
+            ...state,
+            error: 'Failed to save invoice. Please try again.'
+        }));
+    }
 }
 ---
 
@@ -87,7 +124,7 @@ async function handleSaveInvoice(event) {
       <Auth />
     </div>
 
-    {#if !imageData && !isProcessing && !isVerifying}
+    {#if !$appState.isAuthenticated}
       <div class="input-section">
         <h2>Capture Invoice</h2>
         <p>Take a photo of your invoice or select an existing image</p>
@@ -95,7 +132,15 @@ async function handleSaveInvoice(event) {
       </div>
     {/if}
 
-    {#if isProcessing}
+    {#if $appState.isAuthenticated && !$appState.currentImage && !$appState.isProcessing && !$appState.isVerifying}
+      <div class="input-section">
+        <h2>Capture Invoice</h2>
+        <p>Take a photo of your invoice or select an existing image</p>
+        <ImageInput on:image-selected={handleImageSelected} />
+      </div>
+    {/if}
+
+    {#if $appState.isProcessing}
       <div class="processing-section">
         <h2>Processing Invoice</h2>
         <p>Extracting information from your invoice...</p>
@@ -105,17 +150,17 @@ async function handleSaveInvoice(event) {
       </div>
     {/if}
 
-    {#if isVerifying && invoiceData}
+    {#if $appState.isVerifying && $appState.invoiceData}
       <div class="verification-section">
         <h2>Verify Invoice Information</h2>
         <p>Please review the extracted data and make any necessary corrections:</p>
         <ImagePreview
-          imageSrc={imageData?.imageData}
+          imageSrc={$appState.currentImage?.imageData}
           loading={false}
           error={null}
         />
         <InvoiceForm
-          invoiceData={invoiceData}
+          invoiceData={$appState.invoiceData}
           loading={false}
           error={error}
           on:invoice-updated={handleInvoiceUpdated}
@@ -126,15 +171,15 @@ async function handleSaveInvoice(event) {
       </div>
     {/if}
 
-    {#if error}
+    {#if $appState.error}
       <div class="error-message">
-        {error}
+        {$appState.error}
       </div>
     {/if}
 
-    {#if success}
+    {#if $appState.success}
       <div class="success-message">
-        {success}
+        {$appState.success}
       </div>
     {/if}
   </div>
