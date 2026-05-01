@@ -1,0 +1,16 @@
+{
+  "name": "invoice-processing-app",
+  "version": "0.1.0",
+  "private": true,
+  "workspaces": [
+    "frontend",
+    "backend"
+  ],
+  "scripts": {
+    "dev": "concurrently \"pnpm dev --filter frontend\" \"pnpm dev --filter backend\"",
+    "setup": "pnpm install -r"
+  },
+  "devDependencies": {
+    "concurrently": "^8.0.0"
+  }
+}
