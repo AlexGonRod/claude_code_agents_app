@@ -1,222 +1,59 @@
 ---
-const title = 'Invoice Tracker';
+const title = 'FACTURES';
+import './styles/global.css';
+import Toast from './components/Toast.svelte';
+import Auth from './components/Auth.svelte';
+import Nav from './components/Nav.svelte';
+
+const currentPath = Astro.url.pathname;
+const showAuth = currentPath !== '/profile';
 ---
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ca">
   <head>
     <meta charset="utf-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width" />
-    <meta name="theme-color" content="#007bff" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#FDF8F5" />
     <title>{title}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
   </head>
-  <body>
-    <div class="app-container">
-      <header class="app-header">
-        <div class="header-content">
-          <h1 class="app-title">{title}</h1>
-          <div class="user-profile">
-            <!-- User profile will be populated by Auth component -->
-            <slot name="user-profile" />
-          </div>
+  <body class="bg-surface text-primary font-display">
+    <div class="min-h-screen flex flex-col bg-surface">
+      <Toast client:load />
+      <header class="bg-surface-2 border-b border-border sticky top-0 z-50">
+        <div class="flex items-center justify-between w-full px-4 py-2">
+          <h1 class="font-mono text-sm font-semibold text-accent-main tracking-widest">{title}</h1>
+          {showAuth && <Auth client:load />}
         </div>
       </header>
 
-      <main class="app-main">
+      <main class="flex-1 px-4 pb-20 w-full max-w-[500px] mx-auto">
         <slot />
       </main>
 
-      <nav class="app-nav">
-        <ul class="nav-list">
-          <li class="nav-item active">
-            <a href="/" class="nav-link">
-              <span class="nav-icon">📷</span>
-              <span class="nav-label">Capture</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="/history" class="nav-link">
-              <span class="nav-icon">📋</span>
-              <span class="nav-label">History</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="/profile" class="nav-link">
-              <span class="nav-icon">👤</span>
-              <span class="nav-label">Profile</span>
-            </a>
-          </li>
-        </ul>
-      </nav>
+      <Nav client:load />
     </div>
 
-    <style>
-      :root {
-        --primary-color: #007bff;
-        --secondary-color: #6c757d;
-        --background-color: #f8f9fa;
-        --surface-color: #ffffff;
-        --text-primary: #212529;
-        --text-secondary: #6c757d;
-        --border-color: #dee2e6;
-        --success-color: #28a745;
-        --danger-color: #dc3545;
-        --warning-color: #ffc107;
-        --info-color: #17a2b8;
-        --radius-sm: 4px;
-        --radius-md: 8px;
-        --radius-lg: 12px;
-        --spacing-xs: 0.5rem;
-        --spacing-sm: 1rem;
-        --spacing-md: 1.5rem;
-        --spacing-lg: 2rem;
-        --spacing-xl: 3rem;
-      }
-
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-
-      body {
-        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
-          Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-        background-color: var(--background-color);
-        color: var(--text-primary);
-        line-height: 1.6;
-      }
-
-      .app-container {
-        min-height: 100vh;
-        display: flex;
-        flex-direction: column;
-      }
-
-      .app-header {
-        background-color: var(--surface-color);
-        border-bottom: 1px solid var(--border-color);
-        padding: var(--spacing-sm) var(--spacing-md);
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-      }
-
-      .header-content {
-        display: flex;
-        align-items: center;
-        gap: var(--spacing-md);
-      }
-
-      .app-title {
-        font-size: 1.5rem;
-        font-weight: 600;
-        color: var(--primary-color);
-      }
-
-      .user-profile {
-        display: flex;
-        align-items: center;
-        gap: var(--spacing-xs);
-      }
-
-      .app-main {
-        flex: 1;
-        padding: var(--spacing-md);
-        width: 100%;
-        max-width: 600px;
-        margin: 0 auto;
-      }
-
-      .app-nav {
-        background-color: var(--surface-color);
-        border-top: 1px solid var(--border-color);
-        display: flex;
-        justify-content: space-around;
-        padding: var(--spacing-xs) 0;
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        height: 60px;
-        z-index: 1000;
-      }
-
-      .nav-list {
-        display: flex;
-        list-style: none;
-        width: 100%;
-        margin: 0;
-        padding: 0;
-      }
-
-      .nav-item {
-        flex: 1;
-        text-align: center;
-      }
-
-      .nav-link {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        color: var(--text-secondary);
-        text-decoration: none;
-        font-size: 0.75rem;
-        padding: var(--spacing-xs);
-      }
-
-      .nav-link.active {
-        color: var(--primary-color);
-      }
-
-      .nav-icon {
-        font-size: 1.25rem;
-        margin-bottom: var(--spacing-xs);
-      }
-
-      .nav-label {
-        font-size: 0.75rem;
-        font-weight: 500;
-      }
-
+    <style is:global>
       @media (min-width: 768px) {
-        .app-nav {
+        nav {
           position: static;
           height: auto;
           border-top: none;
-          border-bottom: 1px solid var(--border-color);
+          border-bottom: 1px solid #333;
         }
-
-        .nav-list {
+        nav ul {
           flex-direction: row;
+          max-width: 300px;
+          margin: 0 auto;
         }
-
-        .nav-link {
+        nav a {
           flex-direction: row;
-          gap: var(--spacing-sm);
-          text-align: left;
-          justify-content: flex-start;
-        }
-
-        .nav-icon {
-          margin-bottom: 0;
-        }
-      }
-
-      @media (prefers-color-scheme: dark) {
-        :root {
-          --background-color: #121212;
-          --surface-color: #1e1e1e;
-          --text-primary: #ffffff;
-          --text-secondary: #b0b0b0;
-          --border-color: #333333;
-        }
-
-        .app-header,
-        .app-nav {
-          background-color: var(--surface-color);
-          border-color: var(--border-color);
+          gap: 0.5rem;
         }
       }
     </style>

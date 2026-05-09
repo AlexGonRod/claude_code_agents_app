@@ -5,11 +5,13 @@ export const appState = writable({
     user: null,
     isAuthenticated: false,
     currentImage: null,
+    currentImages: [],
     invoiceData: {},
     isProcessing: false,
     isVerifying: false,
     error: null,
-    success: null
+    success: null,
+    saved: false
 });
 
 export const authStore = writable({

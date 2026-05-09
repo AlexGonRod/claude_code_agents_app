@@ -1,0 +1,1 @@
+import{w as i}from"./index.e9d0c0cb.js";const s=i({message:"",type:"success",visible:!1});function c(e,t="success",a=3e3){s.set({message:e,type:t,visible:!0}),setTimeout(()=>{s.set({message:"",type:"success",visible:!1})},a)}export{c as s,s as t};

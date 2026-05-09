@@ -33,9 +33,11 @@ class UserInfo(BaseModel):
 
 class OCRResponse(BaseModel):
     raw_text: str
-    vendor: Optional[str] = None
-    date: Optional[str] = None
-    amount: Optional[float] = None
-    tax: Optional[float] = None
-    line_items: Optional[List[LineItem]] = None
-    notes: Optional[str] = None
+
+class JustificacioData(BaseModel):
+    invoiceNumber: str
+    vendor: str
+    invoiceDate: str
+    nif: Optional[str] = None
+    total: float
+    category: Optional[str] = None

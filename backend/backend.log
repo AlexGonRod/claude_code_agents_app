@@ -1,0 +1,238 @@
+INFO:     Started server process [34143]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+INFO:     127.0.0.1:61028 - "GET / HTTP/1.1" 200 OK
+INFO:ocr:Processing image...
+INFO:ocr:Image data length: 592624
+INFO:ocr:Calling Gemini API...
+INFO:httpx:HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=AIzaSyAEgwqIXl6IL4OkmaQ_tAKbUHaluUOtB_I "HTTP/1.1 200 OK"
+INFO:ocr:Response status: 200
+INFO:ocr:Gemini response: ```json
+{
+"num_de_documento": "6.361",
+"fecha": "11/07/2025",
+"proveedor": "CARNS I EMBOTITS TORRA, S.L.",
+"NIF_CIF": "B63349229",
+"tipo_material": "comida",
+"total": "79,17",
+"lineas": [
+    {
+        "cantidad": "7,54",
+        "concepto": "POLLO ENTERO Cortado",
+        "precio_unitario": "3,59",
+        "importe": "27,07",
+        "iva": "10",
+        "codigo": "901"
+    },
+    {
+        "cantidad": "7,02",
+        "concepto": "COSTILLA CERDO Cortado",
+        "precio_unitario": "5,35",
+    
+INFO:     127.0.0.1:61409 - "POST /ocr/process HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61770 - "OPTIONS /drive/invoices HTTP/1.1" 200 OK
+INFO:drive:Received invoice data: invoiceNumber='N/A' vendor='"concepto": "SALCHICHAS",' invoiceDate='11-07-2025' lineItems=[LineItem(unit='Servei', quantity=1.0, unitPrice=0.0, total=0.0)] total=0.0 nif='B63349229'
+INFO:googleapiclient.discovery_cache:file_cache is only supported with oauth2client<4.0.0
+INFO:drive:Writing line item 1 to range: 4-RELACIO_DESPESES_PER_UNITAT!A4:G4
+INFO:drive:Line item values: [['N/A', '"concepto": "SALCHICHAS",', '11-07-2025', 'Servei', 1.0, 0.0, 0.0]]
+INFO:drive:Update result: {'spreadsheetId': '1eeeJ8_tLU6jU1EpiGJGJdaf0J2_ZchCYW_4ibjNSD_c', 'updatedRange': "'4-RELACIO_DESPESES_PER_UNITAT'!A4:G4", 'updatedRows': 1, 'updatedColumns': 7, 'updatedCells': 7}
+INFO:     127.0.0.1:61770 - "POST /drive/invoices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61770 - "OPTIONS /drive/justificacio HTTP/1.1" 200 OK
+INFO:drive:Received justificacio data: invoiceNumber='N/A' vendor='"concepto": "SALCHICHAS",' invoiceDate='11-07-2025' nif='B63349229' total=0.0 category=None
+INFO:googleapiclient.discovery_cache:file_cache is only supported with oauth2client<4.0.0
+INFO:drive:Writing justificacio to range: 2-JUSTIFICACIO_RELACIO DESPESES!B17:K17
+INFO:drive:Justificacio values: [['Factura', 'N/A', '11-07-2025', '"concepto": "SALCHICHAS",', 'B63349229', '', 0.0, '100%', '', 'alimentació (amanides, tomàquets, pa, tonyina, olives, embotits, botifarres, sardines, oli, all, patates, canapès, postres, cafè, xocolata...), begudes (refrescos, aigua, vi, cava, combinats...), parament de taula (plats de diversos tamanys, gots de diversos tamanys, tovallons, forquilles, culleres, ganivets, estovalles,...)']]
+INFO:drive:Update result: {'spreadsheetId': '1eeeJ8_tLU6jU1EpiGJGJdaf0J2_ZchCYW_4ibjNSD_c', 'updatedRange': "'2-JUSTIFICACIO_RELACIO DESPESES'!B17:K17", 'updatedRows': 1, 'updatedColumns': 10, 'updatedCells': 10}
+INFO:     127.0.0.1:61772 - "POST /drive/justificacio HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63509 - "OPTIONS /ocr/process HTTP/1.1" 200 OK
+INFO:ocr:Processing image...
+INFO:ocr:Image data length: 592624
+INFO:ocr:Calling Gemini API...
+INFO:httpx:HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=AIzaSyAEgwqIXl6IL4OkmaQ_tAKbUHaluUOtB_I "HTTP/1.1 200 OK"
+INFO:ocr:Response status: 200
+INFO:ocr:Gemini response: ```json
+{
+"num_de_documento": "6.361",
+"fecha": "11/07/2025",
+"proveedor": "CARNS I EMBOTITS TORRA, S.L.",
+"NIF_CIF": "B-63.349.229",
+"tipo_material": "comida",
+"total": "79,17",
+"lineas": [
+    {
+        "cantidad": "7,54",
+        "concepto": "POLLO ENTERO Cortado",
+        "precio_unitario": "3,59",
+        "importe": "27,07",
+        "iva": "10",
+        "codigo": "901"
+    },
+    {
+        "cantidad": "7,02",
+        "concepto": "COSTILLA CERDO Cortado",
+        "precio_unitario": "5,35",
+ 
+INFO:     127.0.0.1:63509 - "POST /ocr/process HTTP/1.1" 200 OK
+INFO:drive:Received invoice data: invoiceNumber='6.361' vendor='CARNS I EMBOTITS TORRA, S.L.' invoiceDate='11/07/2025' lineItems=[LineItem(unit='POLLO ENTERO Cortado', quantity=7.54, unitPrice=3.59, total=27.07), LineItem(unit='COSTILLA CERDO Cortado', quantity=7.02, unitPrice=5.35, total=37.56), LineItem(unit='SALCHICHAS', quantity=1.16, unitPrice=6.33, total=7.34)] total=79.17 nif='B-63.349.229'
+INFO:googleapiclient.discovery_cache:file_cache is only supported with oauth2client<4.0.0
+INFO:drive:Writing line item 1 to range: 4-RELACIO_DESPESES_PER_UNITAT!A4:G4
+INFO:drive:Line item values: [['6.361', 'CARNS I EMBOTITS TORRA, S.L.', '11/07/2025', 'POLLO ENTERO Cortado', 7.54, 3.59, 27.07]]
+INFO:drive:Update result: {'spreadsheetId': '1eeeJ8_tLU6jU1EpiGJGJdaf0J2_ZchCYW_4ibjNSD_c', 'updatedRange': "'4-RELACIO_DESPESES_PER_UNITAT'!A4:G4", 'updatedRows': 1, 'updatedColumns': 7, 'updatedCells': 7}
+INFO:drive:Writing line item 2 to range: 4-RELACIO_DESPESES_PER_UNITAT!A5:G5
+INFO:drive:Line item values: [['6.361', 'CARNS I EMBOTITS TORRA, S.L.', '11/07/2025', 'COSTILLA CERDO Cortado', 7.02, 5.35, 37.56]]
+INFO:drive:Update result: {'spreadsheetId': '1eeeJ8_tLU6jU1EpiGJGJdaf0J2_ZchCYW_4ibjNSD_c', 'updatedRange': "'4-RELACIO_DESPESES_PER_UNITAT'!A5:G5", 'updatedRows': 1, 'updatedColumns': 7, 'updatedCells': 7}
+INFO:drive:Writing line item 3 to range: 4-RELACIO_DESPESES_PER_UNITAT!A6:G6
+INFO:drive:Line item values: [['6.361', 'CARNS I EMBOTITS TORRA, S.L.', '11/07/2025', 'SALCHICHAS', 1.16, 6.33, 7.34]]
+INFO:drive:Update result: {'spreadsheetId': '1eeeJ8_tLU6jU1EpiGJGJdaf0J2_ZchCYW_4ibjNSD_c', 'updatedRange': "'4-RELACIO_DESPESES_PER_UNITAT'!A6:G6", 'updatedRows': 1, 'updatedColumns': 7, 'updatedCells': 7}
+INFO:     127.0.0.1:63511 - "POST /drive/invoices HTTP/1.1" 200 OK
+INFO:drive:Received justificacio data: invoiceNumber='6.361' vendor='CARNS I EMBOTITS TORRA, S.L.' invoiceDate='11/07/2025' nif='B-63.349.229' total=79.17 category=None
+INFO:googleapiclient.discovery_cache:file_cache is only supported with oauth2client<4.0.0
+INFO:drive:Writing justificacio to range: 2-JUSTIFICACIO_RELACIO DESPESES!B18:K18
+INFO:drive:Justificacio values: [['Factura', '6.361', '11/07/2025', 'CARNS I EMBOTITS TORRA, S.L.', 'B-63.349.229', '', 79.17, '100%', '', 'alimentació (amanides, tomàquets, pa, tonyina, olives, embotits, botifarres, sardines, oli, all, patates, canapès, postres, cafè, xocolata...), begudes (refrescos, aigua, vi, cava, combinats...), parament de taula (plats de diversos tamanys, gots de diversos tamanys, tovallons, forquilles, culleres, ganivets, estovalles,...)']]
+INFO:drive:Update result: {'spreadsheetId': '1eeeJ8_tLU6jU1EpiGJGJdaf0J2_ZchCYW_4ibjNSD_c', 'updatedRange': "'2-JUSTIFICACIO_RELACIO DESPESES'!B18:K18", 'updatedRows': 1, 'updatedColumns': 10, 'updatedCells': 10}
+INFO:     127.0.0.1:63511 - "POST /drive/justificacio HTTP/1.1" 200 OK
+INFO:ocr:Processing image...
+INFO:ocr:Image data length: 592624
+INFO:ocr:Calling Gemini API...
+INFO:httpx:HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=AIzaSyAEgwqIXl6IL4OkmaQ_tAKbUHaluUOtB_I "HTTP/1.1 200 OK"
+INFO:ocr:Response status: 200
+INFO:ocr:Gemini response: ```json
+{
+  "num_de_documento": "6.361",
+  "fecha": "11/07/2025",
+  "proveedor": "CARNS I EMBOTITS TORRA, S.L.",
+  "NIF_CIF": "B-63349229",
+  "tipo_material": "comida",
+  "total": "79,17",
+  "lineas": [
+    {
+      "cantidad": "7,54",
+      "concepto": "POLLO ENTERO",
+      "precio_unitario": "3,59",
+      "importe": "27,07",
+      "iva": "10,00",
+      "codigo": "901"
+    },
+    {
+      "cantidad": "7,02",
+      "concepto": "COSTILLA CERDO",
+      "precio_unitario": "5,35",
+      "importe": "37
+INFO:     127.0.0.1:64508 - "POST /ocr/process HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64508 - "OPTIONS /drive/invoices HTTP/1.1" 200 OK
+INFO:drive:Received invoice data: invoiceNumber='6.361' vendor='CARNS I EMBOTITS TORRA, S.L.' invoiceDate='11/07/2025' lineItems=[LineItem(unit='POLLO ENTERO', quantity=7.54, unitPrice=3.59, total=27.07), LineItem(unit='COSTILLA CERDO', quantity=7.02, unitPrice=5.35, total=37.56), LineItem(unit='SALCHICHAS', quantity=1.16, unitPrice=6.33, total=7.34)] total=79.17 nif='B-63349229'
+INFO:googleapiclient.discovery_cache:file_cache is only supported with oauth2client<4.0.0
+INFO:drive:Writing line item 1 to range: 4-RELACIO_DESPESES_PER_UNITAT!A4:G4
+INFO:drive:Line item values: [['6.361', 'CARNS I EMBOTITS TORRA, S.L.', '11/07/2025', 'POLLO ENTERO', 7.54, 3.59, 27.07]]
+INFO:drive:Update result: {'spreadsheetId': '1eeeJ8_tLU6jU1EpiGJGJdaf0J2_ZchCYW_4ibjNSD_c', 'updatedRange': "'4-RELACIO_DESPESES_PER_UNITAT'!A4:G4", 'updatedRows': 1, 'updatedColumns': 7, 'updatedCells': 7}
+INFO:drive:Writing line item 2 to range: 4-RELACIO_DESPESES_PER_UNITAT!A5:G5
+INFO:drive:Line item values: [['6.361', 'CARNS I EMBOTITS TORRA, S.L.', '11/07/2025', 'COSTILLA CERDO', 7.02, 5.35, 37.56]]
+INFO:drive:Update result: {'spreadsheetId': '1eeeJ8_tLU6jU1EpiGJGJdaf0J2_ZchCYW_4ibjNSD_c', 'updatedRange': "'4-RELACIO_DESPESES_PER_UNITAT'!A5:G5", 'updatedRows': 1, 'updatedColumns': 7, 'updatedCells': 7}
+INFO:drive:Writing line item 3 to range: 4-RELACIO_DESPESES_PER_UNITAT!A6:G6
+INFO:drive:Line item values: [['6.361', 'CARNS I EMBOTITS TORRA, S.L.', '11/07/2025', 'SALCHICHAS', 1.16, 6.33, 7.34]]
+INFO:drive:Update result: {'spreadsheetId': '1eeeJ8_tLU6jU1EpiGJGJdaf0J2_ZchCYW_4ibjNSD_c', 'updatedRange': "'4-RELACIO_DESPESES_PER_UNITAT'!A6:G6", 'updatedRows': 1, 'updatedColumns': 7, 'updatedCells': 7}
+INFO:     127.0.0.1:64508 - "POST /drive/invoices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64508 - "OPTIONS /drive/justificacio HTTP/1.1" 200 OK
+INFO:drive:Received justificacio data: invoiceNumber='6.361' vendor='CARNS I EMBOTITS TORRA, S.L.' invoiceDate='11/07/2025' nif='B-63349229' total=79.17 category=None
+INFO:googleapiclient.discovery_cache:file_cache is only supported with oauth2client<4.0.0
+INFO:drive:Writing justificacio to range: 2-JUSTIFICACIO_RELACIO DESPESES!B17:K17
+INFO:drive:Justificacio values: [['Factura', '6.361', '11/07/2025', 'CARNS I EMBOTITS TORRA, S.L.', 'B-63349229', '', 79.17, '100%', '', 'alimentació (amanides, tomàquets, pa, tonyina, olives, embotits, botifarres, sardines, oli, all, patates, canapès, postres, cafè, xocolata...), begudes (refrescos, aigua, vi, cava, combinats...), parament de taula (plats de diversos tamanys, gots de diversos tamanys, tovallons, forquilles, culleres, ganivets, estovalles,...)']]
+INFO:drive:Update result: {'spreadsheetId': '1eeeJ8_tLU6jU1EpiGJGJdaf0J2_ZchCYW_4ibjNSD_c', 'updatedRange': "'2-JUSTIFICACIO_RELACIO DESPESES'!B17:K17", 'updatedRows': 1, 'updatedColumns': 10, 'updatedCells': 10}
+INFO:     127.0.0.1:64571 - "POST /drive/justificacio HTTP/1.1" 200 OK
+INFO:ocr:Processing image...
+INFO:ocr:Image data length: 592624
+INFO:ocr:Calling Gemini API...
+INFO:httpx:HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=AIzaSyAEgwqIXl6IL4OkmaQ_tAKbUHaluUOtB_I "HTTP/1.1 200 OK"
+INFO:ocr:Response status: 200
+INFO:ocr:Gemini response: ```json
+{
+  "num_de_documento": "6.361",
+  "fecha": "11/07/2025",
+  "proveedor": "CARNS I EMBOTITS TORRA, S.L.",
+  "NIF_CIF": "B-63.349.229",
+  "tipo_material": "comida",
+  "total": "79,17",
+  "lineas": [
+    {
+      "cantidad": "7,54",
+      "concepto": "POLLO ENTERO Cortado",
+      "precio_unitario": "3,59",
+      "importe": "27,07",
+      "iva": "10",
+      "codigo": "901"
+    },
+    {
+      "cantidad": "7,02",
+      "concepto": "COSTILLA CERDO Cortado",
+      "precio_unitario": "5,35",
+     
+INFO:     127.0.0.1:65090 - "POST /ocr/process HTTP/1.1" 200 OK
+INFO:drive:Received invoice data: invoiceNumber='6.361' vendor='CARNS I EMBOTITS TORRA, S.L.' invoiceDate='11/07/2025' lineItems=[LineItem(unit='POLLO ENTERO Cortado', quantity=7.54, unitPrice=3.59, total=27.07), LineItem(unit='COSTILLA CERDO Cortado', quantity=7.02, unitPrice=5.35, total=37.56), LineItem(unit='SALCHICHAS', quantity=1.16, unitPrice=6.33, total=7.34)] total=79.17 nif='B-63.349.229'
+INFO:googleapiclient.discovery_cache:file_cache is only supported with oauth2client<4.0.0
+INFO:drive:Writing line item 1 to range: 4-RELACIO_DESPESES_PER_UNITAT!A4:G4
+INFO:drive:Line item values: [['6.361', 'CARNS I EMBOTITS TORRA, S.L.', '11/07/2025', 'POLLO ENTERO Cortado', 7.54, 3.59, 27.07]]
+INFO:drive:Update result: {'spreadsheetId': '1eeeJ8_tLU6jU1EpiGJGJdaf0J2_ZchCYW_4ibjNSD_c', 'updatedRange': "'4-RELACIO_DESPESES_PER_UNITAT'!A4:G4", 'updatedRows': 1, 'updatedColumns': 7, 'updatedCells': 7}
+INFO:drive:Writing line item 2 to range: 4-RELACIO_DESPESES_PER_UNITAT!A5:G5
+INFO:drive:Line item values: [['6.361', 'CARNS I EMBOTITS TORRA, S.L.', '11/07/2025', 'COSTILLA CERDO Cortado', 7.02, 5.35, 37.56]]
+INFO:drive:Update result: {'spreadsheetId': '1eeeJ8_tLU6jU1EpiGJGJdaf0J2_ZchCYW_4ibjNSD_c', 'updatedRange': "'4-RELACIO_DESPESES_PER_UNITAT'!A5:G5", 'updatedRows': 1, 'updatedColumns': 7, 'updatedCells': 7}
+INFO:drive:Writing line item 3 to range: 4-RELACIO_DESPESES_PER_UNITAT!A6:G6
+INFO:drive:Line item values: [['6.361', 'CARNS I EMBOTITS TORRA, S.L.', '11/07/2025', 'SALCHICHAS', 1.16, 6.33, 7.34]]
+INFO:drive:Update result: {'spreadsheetId': '1eeeJ8_tLU6jU1EpiGJGJdaf0J2_ZchCYW_4ibjNSD_c', 'updatedRange': "'4-RELACIO_DESPESES_PER_UNITAT'!A6:G6", 'updatedRows': 1, 'updatedColumns': 7, 'updatedCells': 7}
+INFO:     127.0.0.1:65090 - "POST /drive/invoices HTTP/1.1" 200 OK
+INFO:drive:Received justificacio data: invoiceNumber='6.361' vendor='CARNS I EMBOTITS TORRA, S.L.' invoiceDate='11/07/2025' nif='B-63.349.229' total=79.17 category=None
+INFO:googleapiclient.discovery_cache:file_cache is only supported with oauth2client<4.0.0
+INFO:drive:Writing justificacio to range: 2-JUSTIFICACIO_RELACIO DESPESES!B18:K18
+INFO:drive:Justificacio values: [['Factura', '6.361', '11/07/2025', 'CARNS I EMBOTITS TORRA, S.L.', 'B-63.349.229', '', 79.17, '100%', '', 'alimentació (amanides, tomàquets, pa, tonyina, olives, embotits, botifarres, sardines, oli, all, patates, canapès, postres, cafè, xocolata...), begudes (refrescos, aigua, vi, cava, combinats...), parament de taula (plats de diversos tamanys, gots de diversos tamanys, tovallons, forquilles, culleres, ganivets, estovalles,...)']]
+INFO:drive:Update result: {'spreadsheetId': '1eeeJ8_tLU6jU1EpiGJGJdaf0J2_ZchCYW_4ibjNSD_c', 'updatedRange': "'2-JUSTIFICACIO_RELACIO DESPESES'!B18:K18", 'updatedRows': 1, 'updatedColumns': 10, 'updatedCells': 10}
+INFO:     127.0.0.1:65090 - "POST /drive/justificacio HTTP/1.1" 200 OK
+INFO:ocr:Processing image...
+INFO:ocr:Image data length: 592624
+INFO:ocr:Calling Gemini API...
+INFO:httpx:HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=AIzaSyAEgwqIXl6IL4OkmaQ_tAKbUHaluUOtB_I "HTTP/1.1 200 OK"
+INFO:ocr:Response status: 200
+INFO:ocr:Gemini response: ```json
+{
+"num_de_documento": "6.361",
+"fecha": "11/07/2025",
+"proveedor": "CARNS I EMBOTITS TORRA, S.L.",
+"NIF_CIF": "B63349229",
+"tipo_material": "comida",
+"total": "79,17",
+"lineas": [
+    {
+        "cantidad": "7,54",
+        "concepto": "POLLO ENTERO",
+        "precio_unitario": "3,59",
+        "importe": "27,07",
+        "iva": "10",
+        "codigo": "901"
+    },
+    {
+        "cantidad": "7,02",
+        "concepto": "COSTILLA CERDO",
+        "precio_unitario": "5,35",
+        "importe": "
+INFO:     127.0.0.1:65488 - "POST /ocr/process HTTP/1.1" 200 OK
+INFO:drive:Received invoice data: invoiceNumber='6.361' vendor='CARNS I EMBOTITS TORRA, S.L.' invoiceDate='11/07/2025' lineItems=[LineItem(unit='POLLO ENTERO', quantity=7.54, unitPrice=3.59, total=27.07), LineItem(unit='COSTILLA CERDO', quantity=7.02, unitPrice=5.35, total=37.56), LineItem(unit='SALCHICHAS', quantity=1.16, unitPrice=6.33, total=7.34)] total=79.17 nif='B63349229'
+INFO:googleapiclient.discovery_cache:file_cache is only supported with oauth2client<4.0.0
+INFO:drive:Writing line item 1 to range: 4-RELACIO_DESPESES_PER_UNITAT!A4:G4
+INFO:drive:Line item values: [['6.361', 'CARNS I EMBOTITS TORRA, S.L.', '11/07/2025', 'POLLO ENTERO', 7.54, 3.59, 27.07]]
+INFO:drive:Update result: {'spreadsheetId': '1eeeJ8_tLU6jU1EpiGJGJdaf0J2_ZchCYW_4ibjNSD_c', 'updatedRange': "'4-RELACIO_DESPESES_PER_UNITAT'!A4:G4", 'updatedRows': 1, 'updatedColumns': 7, 'updatedCells': 7}
+INFO:drive:Writing line item 2 to range: 4-RELACIO_DESPESES_PER_UNITAT!A5:G5
+INFO:drive:Line item values: [['6.361', 'CARNS I EMBOTITS TORRA, S.L.', '11/07/2025', 'COSTILLA CERDO', 7.02, 5.35, 37.56]]
+INFO:drive:Update result: {'spreadsheetId': '1eeeJ8_tLU6jU1EpiGJGJdaf0J2_ZchCYW_4ibjNSD_c', 'updatedRange': "'4-RELACIO_DESPESES_PER_UNITAT'!A5:G5", 'updatedRows': 1, 'updatedColumns': 7, 'updatedCells': 7}
+INFO:drive:Writing line item 3 to range: 4-RELACIO_DESPESES_PER_UNITAT!A6:G6
+INFO:drive:Line item values: [['6.361', 'CARNS I EMBOTITS TORRA, S.L.', '11/07/2025', 'SALCHICHAS', 1.16, 6.33, 7.34]]
+INFO:drive:Update result: {'spreadsheetId': '1eeeJ8_tLU6jU1EpiGJGJdaf0J2_ZchCYW_4ibjNSD_c', 'updatedRange': "'4-RELACIO_DESPESES_PER_UNITAT'!A6:G6", 'updatedRows': 1, 'updatedColumns': 7, 'updatedCells': 7}
+INFO:     127.0.0.1:65488 - "POST /drive/invoices HTTP/1.1" 200 OK
+INFO:drive:Received justificacio data: invoiceNumber='6.361' vendor='CARNS I EMBOTITS TORRA, S.L.' invoiceDate='11/07/2025' nif='B63349229' total=79.17 category=None
+INFO:googleapiclient.discovery_cache:file_cache is only supported with oauth2client<4.0.0
+INFO:drive:Writing justificacio to range: 2-JUSTIFICACIO_RELACIO DESPESES!B19:K19
+INFO:drive:Justificacio values: [['Factura', '6.361', '11/07/2025', 'CARNS I EMBOTITS TORRA, S.L.', 'B63349229', '', 79.17, '100%', '', 'alimentació (amanides, tomàquets, pa, tonyina, olives, embotits, botifarres, sardines, oli, all, patates, canapès, postres, cafè, xocolata...), begudes (refrescos, aigua, vi, cava, combinats...), parament de taula (plats de diversos tamanys, gots de diversos tamanys, tovallons, forquilles, culleres, ganivets, estovalles,...)']]
+INFO:drive:Update result: {'spreadsheetId': '1eeeJ8_tLU6jU1EpiGJGJdaf0J2_ZchCYW_4ibjNSD_c', 'updatedRange': "'2-JUSTIFICACIO_RELACIO DESPESES'!B19:K19", 'updatedRows': 1, 'updatedColumns': 10, 'updatedCells': 10}
+INFO:     127.0.0.1:65488 - "POST /drive/justificacio HTTP/1.1" 200 OK
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [34143]

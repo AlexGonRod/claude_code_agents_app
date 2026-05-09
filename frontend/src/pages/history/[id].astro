@@ -1,0 +1,28 @@
+---
+import Layout from '../../layout.astro';
+import InvoiceDetail from '../../components/InvoiceDetail.svelte';
+
+export async function getStaticPaths() {
+  try {
+    const response = await fetch('https://adcpdkadrnzjcugumseo.supabase.co/rest/v1/invoices?select=id&order=created_at.desc', {
+      headers: {
+        'apikey': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFkY3Bka2Fkcm56amN1Z3Vtc2VvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjMwMjY3NTYsImV4cCI6MjA3ODYwMjc1Nn0.0WgrBEDeuMTcPpytnuDU4MHHfLWg2cN2wE4A-on1eYI',
+        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFkY3Bka2Fkcm56amN1Z3Vtc2VvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjMwMjY3NTYsImV4cCI6MjA3ODYwMjc1Nn0.0WgrBEDeuMTcPpytnuDU4MHHfLWg2cN2wE4A-on1eYI'
+      }
+    });
+    const invoices = await response.json();
+    return invoices.map(inv => ({
+      params: { id: String(inv.id) },
+      props: { id: inv.id }
+    }));
+  } catch (e) {
+    return [];
+  }
+}
+
+const { id } = Astro.props;
+---
+
+<Layout>
+  <InvoiceDetail client:load id={id} />
+</Layout>

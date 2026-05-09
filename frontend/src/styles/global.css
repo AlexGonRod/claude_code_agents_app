@@ -1,0 +1,82 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --surface: #FDF8F5;
+  --surface-2: #FBF2EE;
+  --surface-3: #F5E6DE;
+  --accent-main: #C46B60;
+  --accent-2: #98D4BE;
+  --primary: #2D2836;
+  --secondary: #5D576B;
+  --tertiary: #1A1520;
+  --border: #DDD0C8;
+  --error: #C95050;
+  --success: #5BA86D;
+  --font-display: 'Outfit', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  html,
+  body {
+    height: 100%;
+  }
+
+  body {
+    font-family: var(--font-display);
+    background-color: var(--surface);
+    color: var(--primary);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    margin: 0;
+    padding: 0;
+  }
+}
+
+@layer utilities {
+  .animate-bounce {
+    animation: bounce 0.6s infinite;
+  }
+
+  @keyframes bounce {
+    0%, 100% {
+      transform: translateY(0);
+      opacity: 0.4;
+    }
+    50% {
+      transform: translateY(-4px);
+      opacity: 1;
+    }
+  }
+
+  @keyframes pulse {
+    0%, 100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.5;
+    }
+  }
+
+  .animate-equalizer {
+    animation: equalizer 0.6s infinite ease-in-out;
+  }
+
+  @keyframes equalizer {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-8px);
+    }
+  }
+}
